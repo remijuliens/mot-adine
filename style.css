@@ -1,0 +1,105 @@
+/* ===== VARIABLES ===== */
+/* ===== BASE ===== */
+
+.base {
+    background-color: black;
+    font-size: large;
+    color: azure;
+    font-family: 'Arial', sans-serif;
+    font-size: 2rem;
+    justify-items: center;
+    align-items: center;
+    margin: 0;
+}
+
+.header {
+      width: 100%; 
+    background-color: #262626;
+  padding: 20px;
+
+}
+
+
+/* ===== GRILLE ===== */
+
+.grille{
+    padding-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    margin: 0.5vw
+}
+.tuile {
+    display: flex;
+    border: 2px solid grey;
+    border-radius: 3px;
+    margin: 4px;
+    width: 3.5vw;
+    height: 3.5vw;
+    font-size: 2rem;
+    justify-content: center;
+    align-items: center;
+
+}
+
+@media (max-width: 480px) { /* petit téléphone */
+  .tuile {
+    width: 8vw;
+    height: 8vw;
+    font-size: 1.2rem;
+  }
+}
+
+
+
+
+/*========CLAVIER============= */
+.clavier {
+    display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      place-items: center;
+      gap: 4px;
+}
+
+.touche {
+    display: flex;
+    border: 1.5px outset grey;
+    border-radius: 4px;
+    margin: 1px;
+    width: 50px;
+    height: 60px;
+    font-size: 2rem;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+
+}
+.touche.large {
+  grid-column: span 2;
+  width: 120px;
+}
+
+.touche:active {
+     background: gray;
+}
+
+
+
+/* ===== STATES ===== */
+.tuile.defaut {
+    background-color: black;
+}
+.tuile.presentMauvaiseEndroit {
+    background-color: #f77c00;
+}
+.tuile.present {
+    background-color: darkgreen;
+}
+.tuile.absent {
+    background-color: grey;
+}
