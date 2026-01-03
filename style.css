@@ -84,7 +84,9 @@
   width: 120px;
 }
 
-.touche:active {
+/* Active pour le clavier virtuel et physique*/
+.touche:active,   
+.touche.active {
      background: gray;
 }
 
