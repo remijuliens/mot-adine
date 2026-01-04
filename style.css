@@ -55,6 +55,9 @@
   }
 }
 
+.tuile.tuileActive {
+  border: 4px solid rgb(255, 0, 0);
+}
 
 
 

@@ -1,28 +1,22 @@
-
-import * as utilitaires from './utilitaire.js';
+import {Partie} from './Partie.js';
 import {ListeMots5Lettres, ListeMots6Lettres, ListeVerification} from './listeMots.js';
-
-
-function nouvellePartie(nombreLettres) {
-    let essai = 0;
-
-    //Si erreur dans le paramètre, donne 5 lettres par défaut
-    let listeDeMots = ListeMots5Lettres;
-    //if (nombreLettres === 6) {listeDeMots = ListeMots6Lettres;} 
-    let i = utilitaires.indexAleatoire(0, listeDeMots.length);
-    let motADeviner = listeDeMots.at(i);
-    console.log(listeDeMots.length);
-    console.log(motADeviner);
-}
+import * as utilitaires from './utilitaires.js';
 
 function main() {
 
-    utilitaires.activationDesTouches();
-    utilitaires.ecouteDesTouches();
-    
     //TODO, proposer à 5 ou 6 lettres par mots.
-    //Piour l'instant, juste 5
-    nouvellePartie(5);
+    //Pour l'instant, juste 5
+   
+    
+
+    //TODO utiliser la classe Partie pour démarrer la partie
+    let partie = new Partie(5);
+    
+    utilitaires.activationDesTouches(partie);
+    utilitaires.ecouteDesTouches(partie);
+    
+
+
 };
 
 document.addEventListener('DOMContentLoaded', main);
