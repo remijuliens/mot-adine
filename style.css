@@ -18,6 +18,21 @@
   padding: 20px;
 
 }
+dialog {
+  background: rgb(49, 49, 49);
+  padding: 40px;
+  border: solid grey;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(209, 94, 94, 0.3);
+  justify-items: center;
+  align-items: center;
+  font-size: large;
+  color: azure;
+  font-family: 'Arial', sans-serif;
+  font-size: 2rem;
+}
+
+
 
 
 /* ===== GRILLE ===== */

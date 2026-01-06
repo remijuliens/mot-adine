@@ -106,7 +106,8 @@ export class Partie {
             }
             //Incrémenter le nombre d'essai et passer à la ligne suivante
             this.affichageDesCouleurs(validationParCouleur);
-            this.prochainEssai();
+            this.validationVictoire(p_essai);
+            if (this.nbEssais <= 6){this.prochainEssai();}
             console.log("Nombre d'essai après incrément : ", this.nbEssais);
         }
     }
@@ -118,6 +119,28 @@ export class Partie {
         this.nbEssais ++;
         this.tuileActive = String(this.nbEssais*10);
         this.activerTuile();
+    }
+
+    /*
+    Gère l'action à prendre après la validation d'un essai
+    1. Si le mot est trouvé
+    2. Si le nombre max de tentatives est atteint.
+    */
+    validationVictoire(p_essai) {
+    
+        //le mot est trouvé : VICTOIRE
+        if (this.motADeviner === p_essai) {
+            this.afficherVictoire();
+    
+        }
+
+        //le nombre max est atteint : défaite
+        if (this.nbEssais === 6){
+            console.log("Vous avez échoué");
+            this.afficherDefaite();
+        }
+
+    
     }
 
     activerTuile(){
@@ -139,9 +162,6 @@ export class Partie {
         return essai;
     }
 
-
-    
-
     affichageDesCouleurs(validationParCouleur){
         console.log(validationParCouleur);
         let indexEnCours = this.nbEssais * 10;
@@ -153,5 +173,35 @@ export class Partie {
             indexEnCours ++;
         }
     }
+
+//============Les pops-up=============
+
+
+afficherVictoire() {
+    console.log("Entré dans 'afficherVictoire'");
+    
+    let popUpVictoire = document.getElementById("victoire");
+    popUpVictoire.showModal();
+    
+    let boutonVictoire = document.getElementById("boutonVictoire");
+    setTimeout(() => {
+        const boutonVictoire = document.getElementById("boutonVictoire");
+        boutonVictoire.addEventListener("click", () => popUpVictoire.close());
+    }, 100);
+}
+
+afficherDefaite() {
+    console.log("Entré dans 'afficherDefaite'");
+    
+    let popUpDefaite = document.getElementById("defaite");
+    popUpDefaite.showModal();
+    
+    let boutonDefaite = document.getElementById("boutonDefaite");
+    setTimeout(() => {
+        const boutonDefaite = document.getElementById("boutonDefaite");
+        boutonDefaite.addEventListener("click", () => popUpDefaite.close());
+    }, 100);
+}
+
 
 };

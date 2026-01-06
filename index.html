@@ -8,7 +8,6 @@
     
     
 </head>
-<script type="module" src="app.js" defer></script>
 <body class="base">
     
 <header class="header">
@@ -75,10 +74,7 @@
     </div>
 </div>
 
-
-
 <div id="clavier" class="clavier">
-
 <button class="touche" data-key="Q">Q</button>
 <button class="touche" data-key="W">W</button>
 <button class="touche" data-key="E">E</button>
@@ -108,9 +104,7 @@
 <button class="touche" data-key="M">M</button>
 <div></div>
 <button class="touche large" data-key="ENTER">⏎</button>
-
 </div>
-
 
 </main>
 
@@ -119,8 +113,21 @@
 <br>
 <br>
 <div style="font-size: small;">© RJ Savard
-    </footer>
+</footer>
 
+
+
+<dialog id="victoire">
+    <h2> Victoire !! </h2>
+    <button id="boutonVictoire">Fermer</button>
+</dialog>
+
+<dialog id="defaite">
+    <h2> Defaite !! </h2>
+    <button id="boutonDefaite">Fermer</button>
+</dialog>
+
+<script type="module" src="app.js" defer></script>
 
 </body>
 </html>
