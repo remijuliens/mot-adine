@@ -44,6 +44,7 @@
     font-size: 2rem;
     justify-content: center;
     align-items: center;
+    background-color: black;
 
 }
 
@@ -60,6 +61,16 @@
 }
 
 
+/* ===== STATES ===== */
+.tuile.presentMauvaiseEndroit {
+    background-color: #f77c00;
+}
+.tuile.present {
+    background-color: darkgreen;
+}
+.tuile.absent {
+    background-color: grey;
+}
 
 /*========CLAVIER============= */
 .clavier {
@@ -94,17 +105,3 @@
 }
 
 
-
-/* ===== STATES ===== */
-.tuile.defaut {
-    background-color: black;
-}
-.tuile.presentMauvaiseEndroit {
-    background-color: #f77c00;
-}
-.tuile.present {
-    background-color: darkgreen;
-}
-.tuile.absent {
-    background-color: grey;
-}

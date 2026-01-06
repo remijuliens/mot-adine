@@ -11,7 +11,6 @@ export class Partie {
         //if (nombreLettres === 6) {listeDeMots = ListeMots6Lettres;} 
         let i = utilitaires.indexAleatoire(0, this.listeDeMots.length);
         this.motADeviner = this.listeDeMots.at(i);
-        this.essai = "";
         this.tuileActive = "10";
         this.activerTuile();
     }
@@ -22,7 +21,7 @@ export class Partie {
     }
 
     longueur(){
-        return this.motADeviner.lenght;
+        return this.nbLettres;
     }
 
     //Donne une liste d'index où se trouve la lettre
@@ -50,9 +49,8 @@ export class Partie {
         let trouve = false; 
         while(!(tuileSuivante.endsWith("5")) && !trouve) {
             let contenu = document.getElementById(tuileSuivante).innerHTML;
-                    console.log("Élément trouvé:", contenu);
 
-            if (contenu === " ") {
+            if (contenu === "") {
                 this.tuileActive = tuileSuivante;
                 this.activerTuile();
                 trouve = true;
@@ -77,30 +75,51 @@ export class Partie {
         }
     }
 
+    //Supprimer la lettre dans la tuile active
+    supprimerLettre() {
+        let t = document.getElementById(this.tuileActive);
+        t.innerText = "";
+    }
+
     //Valider un essai. Met à jour les couleurs et passe à la ligne suivante. 
     // Averti si le mot n'existe pas.
     //TODO ajuster selon qu'il y a plusieurs lettre identiques
-    validerEssai(){
-        if (this.essai.length === this.longueur()){
-            if (ListeVerification.includes(this.essai))
-                { console.log("le mot ${essai} n'est pas valide");
-                    return;
-                }
-            let validationParCouleur = [];
-            for (let i=0; i < this.longueur(); i++){
-                //indexDeLEssai = this.listerIndex(this.essai[i]);
-                if (essai[i] === this.motADeviner[i]) {validationParCouleur[i] = "V"}
-                else if (this.motADeviner.includes(this.essai[i])) {validationParCouleur[i] = "J"}
-                else {validationParCouleur[i] = "G"};
+    validerEssai(p_essai){
+        //Vérifier si toutes les lettres sont là
+        if (p_essai.length != this.longueur()) {
+            console.log("Veuillez entrez un mot de", this.longueur(), "lettres");
+        }
+        else if (!utilitaires.validerMot(p_essai)) {
+            console.log("Le mot est invalide")
+        }
 
-            //Incrémenter le nombre d'essai et passer à la ligne suivante
-            
-            this.nbEssais ++;
-            affichageDesCouleurs(validationParCouleur);
+        else {
+            console.log("motADeviner : ", this.motADeviner);
+            let validationParCouleur = [];
+            console.log("Longueur:", this.longueur()); // Affichez la longueur
+
+            for (let i=0; i < this.longueur(); i++){
+                console.log("La longueur : ",this.longueur());
+                if (p_essai[i] === this.motADeviner[i]) {validationParCouleur.push("V");}
+                else if (this.motADeviner.includes(p_essai[i])) {validationParCouleur.push("J");}
+                else {validationParCouleur.push("G");};
             }
+            //Incrémenter le nombre d'essai et passer à la ligne suivante
+            this.affichageDesCouleurs(validationParCouleur);
+            this.prochainEssai();
+            console.log("Nombre d'essai après incrément : ", this.nbEssais);
         }
     }
     
+    //change le nombre d'essai et met à jour la tuile active
+    prochainEssai() {
+        let ancienneTuile = document.getElementById(this.tuileActive);
+        ancienneTuile.classList.remove('tuileActive');
+        this.nbEssais ++;
+        this.tuileActive = String(this.nbEssais*10);
+        this.activerTuile();
+    }
+
     activerTuile(){
         let rangee = document.getElementById(this.nbEssais);
         let tuile = document.getElementById(this.tuileActive);
@@ -110,12 +129,29 @@ export class Partie {
         tuile.classList.add('tuileActive');
     }
 
+    //Récupère les lettres des tuiles pour former le mot
+    recupererMot() {
+        let essai = "";
+        for (let i = 0; i < this.nbLettres; i++) {
+            let index = String(this.nbEssais * 10 + i);            
+            essai += document.getElementById(index).innerText;
+        }
+        return essai;
+    }
+
+
+    
+
     affichageDesCouleurs(validationParCouleur){
-        //TODO
         console.log(validationParCouleur);
+        let indexEnCours = this.nbEssais * 10;
+        for (let i = 0; i<this.nbLettres; i++){
+            let tuileEnCours = document.getElementById(String(indexEnCours));
+            if (validationParCouleur[i] === "G"){tuileEnCours.classList.add('absent');}
+            else if (validationParCouleur[i] === "J"){tuileEnCours.classList.add('presentMauvaiseEndroit');}
+            else if (validationParCouleur[i] === "V"){tuileEnCours.classList.add('present');}
+            indexEnCours ++;
+        }
     }
-        affichageTest(lettre){
-        //TODO
-        console.log("De la partie : ", lettre);
-    }
+
 };
