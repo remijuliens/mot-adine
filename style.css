@@ -110,8 +110,9 @@ dialog {
     display: grid;
       grid-template-columns: repeat(10, 1fr);
       place-items: center;
-      gap: 0.34rem
-
+      gap: 0.34rem;
+      max-width: 40rem;
+      margin: 0 auto;
 }
 
 .touche {
