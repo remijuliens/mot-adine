@@ -227,16 +227,24 @@ afficherVictoire() {
     
     let popUpVictoire = document.getElementById("victoire");
     let boutonVictoire = document.getElementById("boutonVictoire");
+    boutonVictoire.disabled = true;
     popUpVictoire.showModal();
     
     setTimeout(() => {
-        const boutonVictoire = document.getElementById("boutonVictoire");
-        boutonVictoire.addEventListener("click", () => {popUpVictoire.close(); 
-                                                        this.resetPartie();}
-                                                    );
-    }, 100);
+        boutonVictoire.disabled = false;
+        boutonVictoire.focus();
+    }, 200);
+    
+    popUpVictoire.addEventListener("close", () => {
+        this.resetPartie();
+        }, { once: true });
+    popUpVictoire.addEventListener("keydown", (e) => {
+        if (e.key === "Enter"){
+            this.resetPartie();
+        }
+        }, { once: true });
+    
 }
-
 
 afficherDefaite() {
     console.log("Entré dans 'afficherDefaite'");
