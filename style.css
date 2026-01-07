@@ -57,7 +57,7 @@ dialog {
 /* ===== GRILLE ===== */
 
 .grille{
-    padding-bottom: 20px;
+    padding-bottom: 3rem;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -65,15 +65,15 @@ dialog {
     display: flex;
     justify-content: center;
     align-items: center; 
-    margin: 0.5vw
+    margin: 0.4vw
 }
 .tuile {
     display: flex;
-    border: 2px solid grey;
-    border-radius: 3px;
-    margin: 4px;
-    width: 3.5vw;
-    height: 3.5vw;
+    border: 0.125rem solid grey;
+    border-radius: 0.25rem;
+    margin: 0.2rem;
+    width: 3.5rem;
+    height: 3.5rem;
     font-size: 2rem;
     justify-content: center;
     align-items: center;
@@ -110,16 +110,16 @@ dialog {
     display: grid;
       grid-template-columns: repeat(10, 1fr);
       place-items: center;
-      gap: 4px;
+      gap: 0.34rem
+
 }
 
 .touche {
     display: flex;
-    border: 1.5px outset grey;
-    border-radius: 4px;
-    margin: 1px;
-    width: 50px;
-    height: 60px;
+    border: 0.1rem outset grey;
+    border-radius: 0.25rem;
+    width: 3rem;
+    height: 3.2rem;
     font-size: 2rem;
     justify-content: center;
     align-items: center;
@@ -128,7 +128,7 @@ dialog {
 }
 .touche.large {
   grid-column: span 2;
-  width: 120px;
+  width: 7.5rem;
 }
 
 /* Active pour le clavier virtuel et physique*/
