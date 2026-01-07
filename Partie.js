@@ -107,7 +107,7 @@ export class Partie {
             //Incrémenter le nombre d'essai et passer à la ligne suivante
             this.affichageDesCouleurs(validationParCouleur);
             this.validationVictoire(p_essai);
-            if (this.nbEssais <= 6){this.prochainEssai();}
+            if (this.nbEssais < 6){this.prochainEssai();}
             console.log("Nombre d'essai après incrément : ", this.nbEssais);
         }
     }
@@ -131,7 +131,6 @@ export class Partie {
         //le mot est trouvé : VICTOIRE
         if (this.motADeviner === p_essai) {
             this.afficherVictoire();
-    
         }
 
         //le nombre max est atteint : défaite
@@ -139,8 +138,6 @@ export class Partie {
             console.log("Vous avez échoué");
             this.afficherDefaite();
         }
-
-    
     }
 
     activerTuile(){
@@ -174,6 +171,25 @@ export class Partie {
         }
     }
 
+//débute une nouvelle partie
+resetPartie() {
+    
+    //Remet les cases vides
+    let grille = document.getElementById("grille");
+    for (let rangee of grille.children) {
+        for (let tuile of rangee.children) {
+            tuile.textContent = "";
+            tuile.classList = "tuile";
+        }
+    }
+
+    this.nbEssais = 1;
+    let i = utilitaires.indexAleatoire(0, this.listeDeMots.length);
+    this.motADeviner = this.listeDeMots.at(i);
+    this.tuileActive = "10";
+    this.activerTuile();
+}
+
 //============Les pops-up=============
 
 
@@ -181,27 +197,41 @@ afficherVictoire() {
     console.log("Entré dans 'afficherVictoire'");
     
     let popUpVictoire = document.getElementById("victoire");
+    let boutonVictoire = document.getElementById("boutonVictoire");
     popUpVictoire.showModal();
     
-    let boutonVictoire = document.getElementById("boutonVictoire");
     setTimeout(() => {
         const boutonVictoire = document.getElementById("boutonVictoire");
-        boutonVictoire.addEventListener("click", () => popUpVictoire.close());
+        boutonVictoire.addEventListener("click", () => {popUpVictoire.close(); 
+                                                        this.resetPartie();}
+                                                    );
     }, 100);
 }
+
 
 afficherDefaite() {
     console.log("Entré dans 'afficherDefaite'");
     
     let popUpDefaite = document.getElementById("defaite");
-    popUpDefaite.showModal();
-    
     let boutonDefaite = document.getElementById("boutonDefaite");
-    setTimeout(() => {
-        const boutonDefaite = document.getElementById("boutonDefaite");
-        boutonDefaite.addEventListener("click", () => popUpDefaite.close());
-    }, 100);
-}
+    boutonDefaite.disabled = true;
+    document.getElementById("motADeviner").innerText = this.motADeviner;
+    popUpDefaite.showModal();
 
+
+    setTimeout(() => {
+        boutonDefaite.disabled = false;
+        boutonDefaite.focus();
+    }, 150);
+
+    popUpDefaite.addEventListener("close", () => {
+        this.resetPartie();
+        }, { once: true });
+    popUpDefaite.addEventListener("keydown", (e) => {
+        if (e.key === "Enter"){
+            this.resetPartie();
+        }
+        }, { once: true });
+}
 
 };

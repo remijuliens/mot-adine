@@ -118,13 +118,19 @@
 
 
 <dialog id="victoire">
-    <h2> Victoire !! </h2>
-    <button id="boutonVictoire">Fermer</button>
+    <div class="dialog contenu">
+        <h2> Victoire ! </h2>
+            <p>statisque : </p>
+        <button id="boutonVictoire" class="dialog bouton">Rejouer</button>
+    </div>
 </dialog>
 
 <dialog id="defaite">
-    <h2> Defaite !! </h2>
-    <button id="boutonDefaite">Fermer</button>
+    <form method="dialog" class="dialog contenu">    
+        <h2> Defaite !! </h2>
+        <p>Le mot était : <span id="motADeviner"></span></p>
+        <button id="boutonDefaite" class="dialog bouton" type="submit">Rejouer</button>
+    </form>
 </dialog>
 
 <script type="module" src="app.js" defer></script>

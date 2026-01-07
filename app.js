@@ -8,7 +8,6 @@ function main() {
     //Pour l'instant, juste 5
    
     
-
     //TODO utiliser la classe Partie pour démarrer la partie
     let partie = new Partie(5);
     
