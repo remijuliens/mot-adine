@@ -105,7 +105,8 @@ export class Partie {
                 else {validationParCouleur.push("G");};
             }
             //Incrémenter le nombre d'essai et passer à la ligne suivante
-            this.affichageDesCouleurs(validationParCouleur);
+            this.affichageDesCouleursTuiles(validationParCouleur);
+            this.affichageDesCouleursClavier(validationParCouleur, p_essai.toUpperCase());
             this.validationVictoire(p_essai);
             if (this.nbEssais < 6){this.prochainEssai();}
             console.log("Nombre d'essai après incrément : ", this.nbEssais);
@@ -127,14 +128,16 @@ export class Partie {
     2. Si le nombre max de tentatives est atteint.
     */
     validationVictoire(p_essai) {
-    
+        let victoire = false;
         //le mot est trouvé : VICTOIRE
+
         if (this.motADeviner === p_essai) {
+            victoire = true;
             this.afficherVictoire();
         }
 
         //le nombre max est atteint : défaite
-        if (this.nbEssais === 6){
+        if (this.nbEssais === 6 && !victoire){
             console.log("Vous avez échoué");
             this.afficherDefaite();
         }
@@ -159,15 +162,35 @@ export class Partie {
         return essai;
     }
 
-    affichageDesCouleurs(validationParCouleur){
-        console.log(validationParCouleur);
+    //Affiche les couleurs sur les tuiles
+    affichageDesCouleursTuiles(validationParCouleur){
         let indexEnCours = this.nbEssais * 10;
         for (let i = 0; i<this.nbLettres; i++){
             let tuileEnCours = document.getElementById(String(indexEnCours));
             if (validationParCouleur[i] === "G"){tuileEnCours.classList.add('absent');}
-            else if (validationParCouleur[i] === "J"){tuileEnCours.classList.add('presentMauvaiseEndroit');}
+            else if (validationParCouleur[i] === "J"){tuileEnCours.classList.add('mauvaiseEndroit');}
             else if (validationParCouleur[i] === "V"){tuileEnCours.classList.add('present');}
             indexEnCours ++;
+        }
+    }
+
+    //met-à-jour les couleurs du clavier
+    affichageDesCouleursClavier(validationParCouleur, p_essai) {
+
+        for (let i = 0; i<this.nbLettres; i++){
+            let query = `button[data-key="${p_essai[i]}"]`;            
+            let touche = document.querySelector(query);
+            
+            if (touche.classList.contains('present') || touche.classList.contains('absent')){continue;}
+            else if (touche.classList.contains('mauvaiseEndroit') && validationParCouleur[i] === "V"){
+                touche.classList.remove('mauvaisEndroit');
+                touche.classList.add('present');
+            }
+            else {
+                if (validationParCouleur[i] === "G"){touche.classList.add('absent');}
+                else if (validationParCouleur[i] === "J"){touche.classList.add('mauvaiseEndroit');}
+                else if (validationParCouleur[i] === "V"){touche.classList.add('present');} 
+            }
         }
     }
 
@@ -182,6 +205,12 @@ resetPartie() {
             tuile.classList = "tuile";
         }
     }
+    //Remet le clavier vide
+    let clavier = document.getElementById("clavier");
+    for (let touche of clavier.children) {
+        touche.classList = "touche";
+    }
+    document.querySelector('button[data-key="ENTER"]').classList.add("large");
 
     this.nbEssais = 1;
     let i = utilitaires.indexAleatoire(0, this.listeDeMots.length);

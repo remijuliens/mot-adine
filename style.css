@@ -95,13 +95,13 @@ dialog {
 
 
 /* ===== STATES ===== */
-.tuile.presentMauvaiseEndroit {
+.mauvaiseEndroit {
     background-color: #f77c00;
 }
-.tuile.present {
+.present {
     background-color: darkgreen;
 }
-.tuile.absent {
+.absent {
     background-color: grey;
 }
 
