@@ -56,6 +56,7 @@ export function toucheAppuyee(event, partie) {
         //Récupérer toutes les lettres
         const essai = partie.recupererMot().toLowerCase();
         //Valider l'essai
+    
         partie.validerEssai(essai);
 
     }

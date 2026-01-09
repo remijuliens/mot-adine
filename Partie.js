@@ -87,10 +87,10 @@ export class Partie {
     validerEssai(p_essai){
         //Vérifier si toutes les lettres sont là
         if (p_essai.length != this.longueur()) {
-            console.log("Veuillez entrez un mot de", this.longueur(), "lettres");
+            this.afficherMauvaiseLongueur()
         }
         else if (!utilitaires.validerMot(p_essai)) {
-            console.log("Le mot est invalide")
+            this.afficherMotInvalide();
         }
 
         else {
@@ -241,6 +241,7 @@ afficherVictoire() {
     popUpVictoire.addEventListener("keydown", (e) => {
         if (e.key === "Enter"){
             this.resetPartie();
+            e.stopPropagation();
         }
         }, { once: true });
     
@@ -254,8 +255,6 @@ afficherDefaite() {
     boutonDefaite.disabled = true;
     document.getElementById("motADeviner").innerText = this.motADeviner;
     popUpDefaite.showModal();
-
-
     setTimeout(() => {
         boutonDefaite.disabled = false;
         boutonDefaite.focus();
@@ -267,8 +266,28 @@ afficherDefaite() {
     popUpDefaite.addEventListener("keydown", (e) => {
         if (e.key === "Enter"){
             this.resetPartie();
+            e.stopPropagation();
         }
         }, { once: true });
 }
+
+afficherMotInvalide() {
+    let popUpInvalide = document.getElementById('motInvalide');
+    console.log('=== OUVERTURE ===');
+    popUpInvalide.showModal();
+    setTimeout(() => {
+        popUpInvalide.close();
+    }, 700);
+}
+
+afficherMauvaiseLongueur() {
+    let popUpMauvaiseLongueur = document.getElementById('motMauvaiseLongueur');
+    document.getElementById('nbLettres').innerText = this.nbLettres;
+    popUpMauvaiseLongueur.showModal();
+    setTimeout (() => {
+        popUpMauvaiseLongueur.close();
+    }, 750);
+}
+
 
 };

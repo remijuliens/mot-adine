@@ -5,7 +5,7 @@
     background-color: black;
     font-size: large;
     color: azure;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Verdana', sans-serif; 
     font-size: 2rem;
     justify-items: center;
     align-items: center;
@@ -13,27 +13,50 @@
 }
 
 .header {
-      width: 100%; 
-    background-color: #262626;
+  width: 100%; 
+  background-color: #262626;
   padding: 20px;
 
 }
 dialog {
   background: rgb(49, 49, 49);
   margin: auto;
-  padding: 20px;
   border: solid grey;
-  border-radius: 20px;
+  border-radius: 1rem;
   font-size: large;
-  color: azure;
-  font-family: 'Arial', sans-serif;
+  color: azure; 
   font-size: 2rem;
 }
+dialog:not([open]) {
+    display: none !important;
+}
+
+.dialogErreur {
+  outline: none;
+  margin: auto;
+  height: auto;
+  max-height: 3rem;
+  padding: 0.5rem 4rem;
+  font-size: 1.4rem;
+  font-weight:light;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.dialogErreur p {
+  margin: 0; 
+  padding: 0rem;
+  line-height: 1;
+}
+
 .dialog.contenu {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   flex-direction: column;
   justify-content: flex-start;
-  margin-top: 10px;
   padding: 2rem;
 }
 .dialog.bouton {
@@ -41,7 +64,7 @@ dialog {
     border: 0.3rem outset grey;
     border-radius: 4px;
     margin: 1px;
-    width: 200px;
+    width: 10rem;
     height: 50px;
     font-size: 1.4rem;
     justify-content: center;
