@@ -13,6 +13,7 @@ function main() {
     
     utilitaires.activationDesTouches(partie);
     utilitaires.ecouteDesTouches(partie);
+    utilitaires.ecouteNbLettres(partie);
     
 
 

@@ -10,12 +10,14 @@
     justify-items: center;
     align-items: center;
     margin: 0;
+
 }
 
 .header {
   width: 100%; 
   background-color: #262626;
-  padding: 20px;
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
 
 }
 dialog {
@@ -80,7 +82,7 @@ dialog:not([open]) {
 /* ===== GRILLE ===== */
 
 .grille{
-    padding-bottom: 3rem;
+    padding-bottom: 1rem;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -95,8 +97,8 @@ dialog:not([open]) {
     border: 0.125rem solid grey;
     border-radius: 0.25rem;
     margin: 0.2rem;
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 3rem;
+    height: 3rem;
     font-size: 2rem;
     justify-content: center;
     align-items: center;
@@ -106,14 +108,39 @@ dialog:not([open]) {
 
 @media (max-width: 480px) { /* petit téléphone */
   .tuile {
-    width: 8vw;
-    height: 8vw;
+    width: 7.5vw;
+    height: 7.5vw;
     font-size: 1.2rem;
   }
 }
 
 .tuile.tuileActive {
   border: 4px solid rgb(255, 0, 0);
+}
+
+.tuile.inactive {
+  display: none;
+}
+
+
+.classBoutonNbLettres {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem;
+  gap: 0.7rem;
+}
+
+.boutonNbLettres {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 1rem;
+  color: azure;
+  font-size: large;  
+  background: grey;
+}
+
+.boutonNbLettres.active {
+  background: green;
 }
 
 

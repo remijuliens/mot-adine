@@ -6,9 +6,7 @@ export class Partie {
     constructor(p_nbLettres) {
         this.nbLettres = p_nbLettres;
         this.nbEssais = 1;
-        //Si erreur dans le paramètre, donne 5 lettres par défaut
         this.listeDeMots = ListeMots5Lettres;
-        //if (nombreLettres === 6) {listeDeMots = ListeMots6Lettres;} 
         let i = utilitaires.indexAleatoire(0, this.listeDeMots.length);
         this.motADeviner = this.listeDeMots.at(i);
         this.tuileActive = "10";
@@ -37,7 +35,7 @@ export class Partie {
 
     //déplace la tuile active à droite
     prochaineTuileActive(){
-        if (!(this.tuileActive.endsWith("4"))) {
+        if (!(this.tuileActive.endsWith(String(this.nbLettres - 1)))) {
             this.tuileActive = String(+this.tuileActive + 1);
             this.activerTuile();
         }
@@ -47,7 +45,7 @@ export class Partie {
     prochaineTuileLibre() {
         let tuileSuivante = String(+this.tuileActive + 1);
         let trouve = false; 
-        while(!(tuileSuivante.endsWith("5")) && !trouve) {
+        while(!(tuileSuivante.endsWith(String(this.nbLettres))) && !trouve) {
             let contenu = document.getElementById(tuileSuivante).innerHTML;
 
             if (contenu === "") {
@@ -70,7 +68,7 @@ export class Partie {
     affichageLettre(lettre) {
         let t = document.getElementById(this.tuileActive);
         t.innerText = lettre;
-        if (!(this.tuileActive.endsWith(4))) {
+        if (!(this.tuileActive.endsWith(this.nbLettres-1))) {
             this.prochaineTuileLibre();
         }
     }
@@ -205,13 +203,22 @@ resetPartie() {
             tuile.classList = "tuile";
         }
     }
+
+    //Ajuste le nombre de tuiles
+    if (this.nbLettres === 5){
+        for (let i = 1; i<=6; i++){
+            let id = String(i) + "5";
+            document.getElementById(id).classList.add('inactive');}
+        }
+
     //Remet le clavier vide
     let clavier = document.getElementById("clavier");
     for (let touche of clavier.children) {
         touche.classList = "touche";
     }
     document.querySelector('button[data-key="ENTER"]').classList.add("large");
-
+    
+    //Reset les valeurs
     this.nbEssais = 1;
     let i = utilitaires.indexAleatoire(0, this.listeDeMots.length);
     this.motADeviner = this.listeDeMots.at(i);
@@ -220,7 +227,6 @@ resetPartie() {
 }
 
 //============Les pops-up=============
-
 
 afficherVictoire() {
     console.log("Entré dans 'afficherVictoire'");
@@ -287,6 +293,27 @@ afficherMauvaiseLongueur() {
     setTimeout (() => {
         popUpMauvaiseLongueur.close();
     }, 750);
+}
+
+//========Gestion bouton du nb de lettres==============
+clickBouton5Lettres() {
+    if (this.nbLettres!=5){
+        document.getElementById('btn6Lettres').classList.toggle('active');
+        document.getElementById('btn5Lettres').classList.toggle('active');
+        this.nbLettres = 5;
+        this.listeDeMots = ListeMots6Lettres;
+        this.resetPartie();
+
+    }
+}
+clickBouton6Lettres() {
+    if (this.nbLettres!=6){
+        document.getElementById('btn6Lettres').classList.toggle('active');
+        document.getElementById('btn5Lettres').classList.toggle('active');
+        this.nbLettres = 6;
+        this.listeDeMots = ListeMots6Lettres;
+        this.resetPartie();
+    }
 }
 
 

@@ -68,3 +68,10 @@ export function toucheAppuyee(event, partie) {
         partie.prochaineTuileActive();
         }
 }
+
+export function ecouteNbLettres(partie) {
+    const btn5 = document.getElementById('btn5Lettres');
+    btn5.addEventListener('click', ()=> partie.clickBouton5Lettres());
+    const btn6 = document.getElementById('btn6Lettres');
+    btn6.addEventListener('click', ()=> partie.clickBouton6Lettres());
+}
