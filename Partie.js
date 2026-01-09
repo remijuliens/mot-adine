@@ -13,10 +13,7 @@ export class Partie {
         this.activerTuile();
     }
 
-    //vérifie si le mot à deviner contient la lettre
-    contient(lettre){
-        return this.motADeviner.includes(lettre);
-    }
+
 
     longueur(){
         return this.nbLettres;
@@ -79,6 +76,34 @@ export class Partie {
         t.innerText = "";
     }
 
+    //Compare un essai et le mot à trouver.
+    //Retourne un liste
+    comparer(p_essai) {
+
+        for (let i=0; i < this.nbLettres; i++)
+        {
+            //Si la lettre n'est presene qu'une fois dans les 2
+            
+
+            ///utilitaires.contientTantDe(p_mot, p_lettre)
+            ///utilitaire.contien(p_mot. p_lettre)
+
+
+
+            //plusieurs lettres dans chacun, même nombre
+
+
+            //plusieurs lettres identique dans la tentative
+            //et plus que dans le mot à trouver
+
+
+            //plusieurs lettres identiques dans le mot à trouver
+            //et plus que dans la tentative
+        }
+
+    }
+
+
     //Valider un essai. Met à jour les couleurs et passe à la ligne suivante. 
     // Averti si le mot n'existe pas.
     //TODO ajuster selon qu'il y a plusieurs lettre identiques
@@ -93,15 +118,16 @@ export class Partie {
 
         else {
             console.log("motADeviner : ", this.motADeviner);
-            let validationParCouleur = [];
-            console.log("Longueur:", this.longueur()); // Affichez la longueur
+            
+            let validationParCouleur = this.comparer(p_essai);
 
+            /*
             for (let i=0; i < this.longueur(); i++){
-                console.log("La longueur : ",this.longueur());
                 if (p_essai[i] === this.motADeviner[i]) {validationParCouleur.push("V");}
                 else if (this.motADeviner.includes(p_essai[i])) {validationParCouleur.push("J");}
                 else {validationParCouleur.push("G");};
             }
+            */
             //Incrémenter le nombre d'essai et passer à la ligne suivante
             this.affichageDesCouleursTuiles(validationParCouleur);
             this.affichageDesCouleursClavier(validationParCouleur, p_essai.toUpperCase());
@@ -136,7 +162,6 @@ export class Partie {
 
         //le nombre max est atteint : défaite
         if (this.nbEssais === 6 && !victoire){
-            console.log("Vous avez échoué");
             this.afficherDefaite();
         }
     }
@@ -192,8 +217,8 @@ export class Partie {
         }
     }
 
-//débute une nouvelle partie
-resetPartie() {
+    //débute une nouvelle partie
+    resetPartie() {
     
     //Remet les cases vides
     let grille = document.getElementById("grille");
@@ -228,9 +253,7 @@ resetPartie() {
 
 //============Les pops-up=============
 
-afficherVictoire() {
-    console.log("Entré dans 'afficherVictoire'");
-    
+afficherVictoire() {    
     let popUpVictoire = document.getElementById("victoire");
     let boutonVictoire = document.getElementById("boutonVictoire");
     boutonVictoire.disabled = true;
@@ -253,9 +276,7 @@ afficherVictoire() {
     
 }
 
-afficherDefaite() {
-    console.log("Entré dans 'afficherDefaite'");
-    
+afficherDefaite() {    
     let popUpDefaite = document.getElementById("defaite");
     let boutonDefaite = document.getElementById("boutonDefaite");
     boutonDefaite.disabled = true;
@@ -279,7 +300,6 @@ afficherDefaite() {
 
 afficherMotInvalide() {
     let popUpInvalide = document.getElementById('motInvalide');
-    console.log('=== OUVERTURE ===');
     popUpInvalide.showModal();
     setTimeout(() => {
         popUpInvalide.close();

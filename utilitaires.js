@@ -1,6 +1,21 @@
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 import {ListeVerification} from './listeMots.js';
 
+
+//vérifie si le mot à deviner contient la lettre
+export function contient(p_mot, p_lettre){
+    return p_mot.includes(p_lettre);
+}
+
+//retourne le nombre de fois que la lettre apparait dans le mot
+export function contientTantDe(p_mot, p_lettre){
+    let cmpt=0;
+    for (let i=0; i<this.nbLettres; i++) {
+        if (p_mot[i]===p_lettre) {cmpt++}
+    }
+    return cmpt;
+}
+
 //valide si le mot passé appartient à la liste de mots valide
 export function validerMot(p_mot) {
         return ListeVerification.has(p_mot);
@@ -19,8 +34,18 @@ export function activationDesTouches(partie)  {
 
 export function toucheActivee(event, partie) {
     let lettre = event.target.textContent;
-    console.log("touche pressée :", lettre);
-    partie.affichageTest(lettre);
+
+    switch (lettre) {
+        case '⌫':
+            lettre = 'BACKSPACE';
+            break;
+        case '⏎':
+            lettre = 'ENTER';
+            break;
+        default:
+            break;
+    }
+    gestionDesTouches(partie, lettre);
 }
 
 export function ecouteDesTouches(partie) {
@@ -29,6 +54,11 @@ export function ecouteDesTouches(partie) {
 
 export function toucheAppuyee(event, partie) {
     let lettre = event.key.toUpperCase();
+    gestionDesTouches(partie, lettre);
+}
+
+    //Passe la lettre à gérer (en majuscule)
+export function gestionDesTouches(partie, lettre) {
     if (alphabet.includes(lettre)){
         partie.affichageLettre(lettre);
       //Effet d'enfoncement de la touche sur la page.
@@ -47,7 +77,6 @@ export function toucheAppuyee(event, partie) {
         setTimeout(() => {bouton.classList.remove('active');}, 150);
     }
     else if (lettre === "ENTER") {
-
         //Effet d'enfoncement de la touche sur la page.
         const bouton = document.querySelector(`button[data-key="ENTER"]`);
         bouton.classList.add('active');
