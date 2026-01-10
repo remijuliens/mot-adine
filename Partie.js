@@ -8,7 +8,8 @@ export class Partie {
         this.nbEssais = 1;
         this.listeDeMots = ListeMots5Lettres;
         let i = utilitaires.indexAleatoire(0, this.listeDeMots.length);
-        this.motADeviner = this.listeDeMots.at(i);
+        //this.motADeviner = this.listeDeMots.at(i);
+        this.motADeviner = "regle";
         this.tuileActive = "10";
         this.activerTuile();
     }
@@ -17,17 +18,6 @@ export class Partie {
 
     longueur(){
         return this.nbLettres;
-    }
-
-    //Donne une liste d'index où se trouve la lettre
-    listerIndex(lettre){
-        let indexDeLaLettre = [];
-        for (let i=0; i < this.longueur(); i++){
-            if (this.motADeviner[i] === lettre){
-                indexDeLaLettre.push(i);
-            }
-        }
-        return indexDeLaLettre;
     }
 
     //déplace la tuile active à droite
@@ -80,27 +70,80 @@ export class Partie {
     //Retourne un liste
     comparer(p_essai) {
 
+        let validationParCouleur = new Array(this.nbLettres).fill("");
         for (let i=0; i < this.nbLettres; i++)
         {
-            //Si la lettre n'est presene qu'une fois dans les 2
+            let essaiContientTant = utilitaires.contientTantDe(p_essai, p_essai[i]);
+            let motADevinerContientTant = utilitaires.contientTantDe(this.motADeviner, p_essai[i]);
+            //Si la lettre n'est pas là
+            if (motADevinerContientTant === 0){
+                validationParCouleur[i] = "G";
+            }
+            //Si les deux contiennent même nombre de lettres (1 ou +)
+            else if (motADevinerContientTant === essaiContientTant) {
+                if (this.motADeviner[i] === p_essai[i]) {validationParCouleur[i] = "V";}
+                else {validationParCouleur[i] = "J";}
+            }
             
-
-            ///utilitaires.contientTantDe(p_mot, p_lettre)
-            ///utilitaire.contien(p_mot. p_lettre)
-
-
-
-            //plusieurs lettres dans chacun, même nombre
-
-
-            //plusieurs lettres identique dans la tentative
+            //plusieurs lettres identique dans l'essai
             //et plus que dans le mot à trouver
-
-
+            else if (essaiContientTant > motADevinerContientTant) {
+               let indexsMotADeviner = utilitaires.listerIndex(this.motADeviner, p_essai[i]);
+               let indexsEssai = utilitaires.listerIndex(p_essai, p_essai[i]);
+               let nbLettresDansMotsADeviner = indexsMotADeviner.length;
+            
+               while (nbLettresDansMotsADeviner > 0) {
+                for (let indexMot of indexsMotADeviner) {
+                    let j;
+                    if ((j = indexsEssai.indexOf(indexMot)) != -1)
+                    {
+                        validationParCouleur[indexsEssai[j]] = "V";
+                        nbLettresDansMotsADeviner --;
+                        indexsEssai.splice(j, 1);
+                    }
+                }
+                if (nbLettresDansMotsADeviner === 0) {break;}
+                validationParCouleur[indexsEssai[0]] = "J";
+                indexsEssai.splice(0, 1)
+                nbLettresDansMotsADeviner --;
+               }
+               for (let index of indexsEssai){
+                validationParCouleur[index] = "G";
+               }
+            }
+            //TODO ne fonctionne pas...
             //plusieurs lettres identiques dans le mot à trouver
             //et plus que dans la tentative
-        }
+            else if (motADevinerContientTant > essaiContientTant)
+            {
+                let indexsMotADeviner = utilitaires.listerIndex(this.motADeviner, p_essai[i]);
+                let indexsEssai = utilitaires.listerIndex(p_essai, p_essai[i]);
+                let nbLettresDansEssai = indexsEssai.length;
 
+                    console.log("🔍 Condition else if atteinte");
+                while (nbLettresDansEssai > 0) {
+                    console.log("entré dans la boucle");
+                    for (let indexEssai of indexsEssai) {
+                        
+                        if (this.motADeviner[indexEssai] === p_essai[indexEssai])
+                        {
+                            validationParCouleur[indexEssai] = "V";
+                            nbLettresDansEssai --;
+                        }
+                        if (nbLettresDansEssai === 0) {break;}
+
+                        //PROBLEME ICI. JE DOIS SUPPRIMER LES INDEX AU FUR ET À MESURE (VOIR LIGNE 98)
+                        validationParCouleur[indexEssai] = "J";
+                        nbLettresDansEssai --;
+                    }   
+                }
+                for (let index of indexsEssai){
+                    validationParCouleur[index] = "G";
+               } 
+            }
+
+        }
+        return validationParCouleur;
     }
 
 
@@ -120,7 +163,7 @@ export class Partie {
             console.log("motADeviner : ", this.motADeviner);
             
             let validationParCouleur = this.comparer(p_essai);
-
+            console.log(validationParCouleur);
             /*
             for (let i=0; i < this.longueur(); i++){
                 if (p_essai[i] === this.motADeviner[i]) {validationParCouleur.push("V");}
@@ -187,6 +230,7 @@ export class Partie {
 
     //Affiche les couleurs sur les tuiles
     affichageDesCouleursTuiles(validationParCouleur){
+        console.log(validationParCouleur);
         let indexEnCours = this.nbEssais * 10;
         for (let i = 0; i<this.nbLettres; i++){
             let tuileEnCours = document.getElementById(String(indexEnCours));

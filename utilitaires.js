@@ -9,12 +9,23 @@ export function contient(p_mot, p_lettre){
 
 //retourne le nombre de fois que la lettre apparait dans le mot
 export function contientTantDe(p_mot, p_lettre){
-    let cmpt=0;
-    for (let i=0; i<this.nbLettres; i++) {
-        if (p_mot[i]===p_lettre) {cmpt++}
+    let cmpt = 0;
+    for (let i = 0; i<p_mot.length; i++) {
+        if (p_mot[i] === p_lettre) {cmpt += 1;}
     }
     return cmpt;
 }
+
+    //Donne une liste d'index où se trouve la lettre
+export function listerIndex(p_mot, p_lettre){
+        let indexsDeLaLettre = [];
+        for (let i=0; i < p_mot.length; i++){
+            if (p_mot[i] === p_lettre){
+                indexsDeLaLettre.push(i);
+            }
+        }
+        return indexsDeLaLettre;
+    }
 
 //valide si le mot passé appartient à la liste de mots valide
 export function validerMot(p_mot) {
