@@ -111,7 +111,6 @@ export class Partie {
                 validationParCouleur[index] = "G";
                }
             }
-            //TODO ne fonctionne pas...
             //plusieurs lettres identiques dans le mot à trouver
             //et plus que dans la tentative
             else if (motADevinerContientTant > essaiContientTant)
@@ -131,15 +130,10 @@ export class Partie {
                             nbLettresDansEssai --;
                         }
                         if (nbLettresDansEssai === 0) {break;}
-
-                        //PROBLEME ICI. JE DOIS SUPPRIMER LES INDEX AU FUR ET À MESURE (VOIR LIGNE 98)
                         validationParCouleur[indexEssai] = "J";
                         nbLettresDansEssai --;
                     }   
                 }
-                for (let index of indexsEssai){
-                    validationParCouleur[index] = "G";
-               } 
             }
 
         }
