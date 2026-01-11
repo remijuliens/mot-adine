@@ -39,9 +39,12 @@ export function indexAleatoire(min, max) {
 export function activationDesTouches(partie)  {
 
     const touche = document.querySelectorAll('.touche');
-    touche.forEach(bouton => { bouton.addEventListener('click', () => toucheActivee(event, partie))}
-    );
-};
+    touche.forEach(bouton => 
+        {bouton.addEventListener('click', (event) => {
+            toucheActivee(event, partie);
+            bouton.blur();});
+        });
+    }
 
 export function toucheActivee(event, partie) {
     let lettre = event.target.textContent;
@@ -64,7 +67,7 @@ export function ecouteDesTouches(partie) {
 }
 
 export function toucheAppuyee(event, partie) {
-    let lettre = event.key.toUpperCase();
+    const lettre = event.key.toUpperCase();
     gestionDesTouches(partie, lettre);
 }
 
@@ -78,7 +81,7 @@ export function gestionDesTouches(partie, lettre) {
         setTimeout(() => {bouton.classList.remove('active');}, 150);
     }
     else if (lettre === "BACKSPACE") {
-        let t = document.getElementById(partie.tuileActive);
+        const t = document.getElementById(partie.tuileActive);
         if (t.innerText === "") {partie.precedenteTuileActive();};
         partie.supprimerLettre();
 
@@ -96,7 +99,6 @@ export function gestionDesTouches(partie, lettre) {
         //Récupérer toutes les lettres
         const essai = partie.recupererMot().toLowerCase();
         //Valider l'essai
-    
         partie.validerEssai(essai);
 
     }

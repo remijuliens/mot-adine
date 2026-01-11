@@ -1,3 +1,5 @@
+# Petit script pour mettre une liste de mot txt --> prêt pour un array en js
+
 from sys import argv
 
 with open(argv[1]) as fichier:

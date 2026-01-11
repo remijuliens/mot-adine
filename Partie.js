@@ -8,8 +8,7 @@ export class Partie {
         this.nbEssais = 1;
         this.listeDeMots = ListeMots5Lettres;
         let i = utilitaires.indexAleatoire(0, this.listeDeMots.length);
-        //this.motADeviner = this.listeDeMots.at(i);
-        this.motADeviner = "regle";
+        this.motADeviner = this.listeDeMots.at(i);
         this.tuileActive = "10";
         this.activerTuile();
     }
@@ -33,7 +32,7 @@ export class Partie {
         let tuileSuivante = String(+this.tuileActive + 1);
         let trouve = false; 
         while(!(tuileSuivante.endsWith(String(this.nbLettres))) && !trouve) {
-            let contenu = document.getElementById(tuileSuivante).innerHTML;
+            const contenu = document.getElementById(tuileSuivante).innerHTML;
 
             if (contenu === "") {
                 this.tuileActive = tuileSuivante;
@@ -53,7 +52,7 @@ export class Partie {
     }
 
     affichageLettre(lettre) {
-        let t = document.getElementById(this.tuileActive);
+        const t = document.getElementById(this.tuileActive);
         t.innerText = lettre;
         if (!(this.tuileActive.endsWith(this.nbLettres-1))) {
             this.prochaineTuileLibre();
@@ -62,7 +61,7 @@ export class Partie {
 
     //Supprimer la lettre dans la tuile active
     supprimerLettre() {
-        let t = document.getElementById(this.tuileActive);
+        const t = document.getElementById(this.tuileActive);
         t.innerText = "";
     }
 
@@ -115,7 +114,6 @@ export class Partie {
             //et plus que dans la tentative
             else if (motADevinerContientTant > essaiContientTant)
             {
-                let indexsMotADeviner = utilitaires.listerIndex(this.motADeviner, p_essai[i]);
                 let indexsEssai = utilitaires.listerIndex(p_essai, p_essai[i]);
                 let nbLettresDansEssai = indexsEssai.length;
 
@@ -143,7 +141,6 @@ export class Partie {
 
     //Valider un essai. Met à jour les couleurs et passe à la ligne suivante. 
     // Averti si le mot n'existe pas.
-    //TODO ajuster selon qu'il y a plusieurs lettre identiques
     validerEssai(p_essai){
         //Vérifier si toutes les lettres sont là
         if (p_essai.length != this.longueur()) {
@@ -190,8 +187,8 @@ export class Partie {
     */
     validationVictoire(p_essai) {
         let victoire = false;
-        //le mot est trouvé : VICTOIRE
-
+        
+        //le mot est trouvé : victoire
         if (this.motADeviner === p_essai) {
             victoire = true;
             this.afficherVictoire();
@@ -204,8 +201,8 @@ export class Partie {
     }
 
     activerTuile(){
-        let rangee = document.getElementById(this.nbEssais);
-        let tuile = document.getElementById(this.tuileActive);
+        const rangee = document.getElementById(this.nbEssais);
+        const tuile = document.getElementById(this.tuileActive);
         for (let t of rangee.children){
             t.classList.remove('tuileActive');
         }
@@ -227,7 +224,7 @@ export class Partie {
         console.log(validationParCouleur);
         let indexEnCours = this.nbEssais * 10;
         for (let i = 0; i<this.nbLettres; i++){
-            let tuileEnCours = document.getElementById(String(indexEnCours));
+            const tuileEnCours = document.getElementById(String(indexEnCours));
             if (validationParCouleur[i] === "G"){tuileEnCours.classList.add('absent');}
             else if (validationParCouleur[i] === "J"){tuileEnCours.classList.add('mauvaiseEndroit');}
             else if (validationParCouleur[i] === "V"){tuileEnCours.classList.add('present');}
@@ -259,7 +256,7 @@ export class Partie {
     resetPartie() {
     
     //Remet les cases vides
-    let grille = document.getElementById("grille");
+    const grille = document.getElementById("grille");
     for (let rangee of grille.children) {
         for (let tuile of rangee.children) {
             tuile.textContent = "";
@@ -275,7 +272,7 @@ export class Partie {
         }
 
     //Remet le clavier vide
-    let clavier = document.getElementById("clavier");
+    const clavier = document.getElementById("clavier");
     for (let touche of clavier.children) {
         touche.classList = "touche";
     }
@@ -292,8 +289,8 @@ export class Partie {
 //============Les pops-up=============
 
 afficherVictoire() {    
-    let popUpVictoire = document.getElementById("victoire");
-    let boutonVictoire = document.getElementById("boutonVictoire");
+    const popUpVictoire = document.getElementById("victoire");
+    const boutonVictoire = document.getElementById("boutonVictoire");
     boutonVictoire.disabled = true;
     popUpVictoire.showModal();
     
@@ -315,8 +312,8 @@ afficherVictoire() {
 }
 
 afficherDefaite() {    
-    let popUpDefaite = document.getElementById("defaite");
-    let boutonDefaite = document.getElementById("boutonDefaite");
+    const popUpDefaite = document.getElementById("defaite");
+    const boutonDefaite = document.getElementById("boutonDefaite");
     boutonDefaite.disabled = true;
     document.getElementById("motADeviner").innerText = this.motADeviner;
     popUpDefaite.showModal();
@@ -337,7 +334,7 @@ afficherDefaite() {
 }
 
 afficherMotInvalide() {
-    let popUpInvalide = document.getElementById('motInvalide');
+    const popUpInvalide = document.getElementById('motInvalide');
     popUpInvalide.showModal();
     setTimeout(() => {
         popUpInvalide.close();
@@ -345,7 +342,7 @@ afficherMotInvalide() {
 }
 
 afficherMauvaiseLongueur() {
-    let popUpMauvaiseLongueur = document.getElementById('motMauvaiseLongueur');
+    const popUpMauvaiseLongueur = document.getElementById('motMauvaiseLongueur');
     document.getElementById('nbLettres').innerText = this.nbLettres;
     popUpMauvaiseLongueur.showModal();
     setTimeout (() => {
@@ -359,7 +356,7 @@ clickBouton5Lettres() {
         document.getElementById('btn6Lettres').classList.toggle('active');
         document.getElementById('btn5Lettres').classList.toggle('active');
         this.nbLettres = 5;
-        this.listeDeMots = ListeMots6Lettres;
+        this.listeDeMots = ListeMots5Lettres;
         this.resetPartie();
 
     }

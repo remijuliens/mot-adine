@@ -175,8 +175,12 @@ dialog:not([open]) {
     justify-content: center;
     align-items: center;
     user-select: none;
+  }
 
+.touche:focus {
+ outline: none;
 }
+
 .touche.large {
   grid-column: span 3;
   width: 7.5rem;
