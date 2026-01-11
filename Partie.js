@@ -229,12 +229,14 @@ export class Partie {
         for (let i = 0; i<this.nbLettres; i++){
             let query = `button[data-key="${p_essai[i]}"]`;            
             let touche = document.querySelector(query);
-            
-            if (touche.classList.contains('present') || touche.classList.contains('absent')){continue;}
-            else if (touche.classList.contains('mauvaiseEndroit') && validationParCouleur[i] === "V"){
-                touche.classList.remove('mauvaisEndroit');
-                touche.classList.add('present');
-            }
+            if (touche.classList.contains('present') || touche.classList.contains('absent')){continue;}    
+            else if (touche.classList.contains('mauvaiseEndroit')) {
+                if (validationParCouleur[i] === "V"){
+                    touche.classList.remove('mauvaisEndroit');
+                    touche.classList.add('present');}
+                    //Si gris, on ne touche pas.
+                    }
+
             else {
                 if (validationParCouleur[i] === "G"){touche.classList.add('absent');}
                 else if (validationParCouleur[i] === "J"){touche.classList.add('mauvaiseEndroit');}
@@ -245,7 +247,7 @@ export class Partie {
 
     //débute une nouvelle partie
     resetPartie() {
-    
+
     //Remet les cases vides
     const grille = document.getElementById("grille");
     for (let rangee of grille.children) {
@@ -273,6 +275,7 @@ export class Partie {
     this.nbEssais = 1;
     let i = utilitaires.indexAleatoire(0, this.listeDeMots.length);
     this.motADeviner = this.listeDeMots.at(i);
+    console.log("Mot à deviner : ", this.motADeviner);
     this.tuileActive = "10";
     this.activerTuile();
 }

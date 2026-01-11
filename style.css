@@ -24,10 +24,10 @@
 
 /* ===== ÉTATS ===== */
 .mauvaiseEndroit {
-    background-color: #f77c00;
+    background-color: rgb(228, 168, 0);
 }
 .present {
-    background-color: darkgreen;
+    background-color: rgb(14, 116, 14);
 }
 .absent {
     background-color: grey;
