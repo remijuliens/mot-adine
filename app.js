@@ -3,6 +3,7 @@ import {ListeMots5Lettres, ListeMots6Lettres, ListeVerification} from './listeMo
 import * as utilitaires from './utilitaires.js';
 
 function main() {
+    
     let partie = new Partie(5);
     
     utilitaires.activationDesTouches(partie);

@@ -117,9 +117,7 @@ export class Partie {
                 let indexsEssai = utilitaires.listerIndex(p_essai, p_essai[i]);
                 let nbLettresDansEssai = indexsEssai.length;
 
-                    console.log("🔍 Condition else if atteinte");
                 while (nbLettresDansEssai > 0) {
-                    console.log("entré dans la boucle");
                     for (let indexEssai of indexsEssai) {
                         
                         if (this.motADeviner[indexEssai] === p_essai[indexEssai])
@@ -150,11 +148,8 @@ export class Partie {
             this.afficherMotInvalide();
         }
 
-        else {
-            console.log("motADeviner : ", this.motADeviner);
-            
+        else {            
             let validationParCouleur = this.comparer(p_essai);
-            console.log(validationParCouleur);
             /*
             for (let i=0; i < this.longueur(); i++){
                 if (p_essai[i] === this.motADeviner[i]) {validationParCouleur.push("V");}
@@ -167,7 +162,6 @@ export class Partie {
             this.affichageDesCouleursClavier(validationParCouleur, p_essai.toUpperCase());
             this.validationVictoire(p_essai);
             if (this.nbEssais < 6){this.prochainEssai();}
-            console.log("Nombre d'essai après incrément : ", this.nbEssais);
         }
     }
     
@@ -221,7 +215,6 @@ export class Partie {
 
     //Affiche les couleurs sur les tuiles
     affichageDesCouleursTuiles(validationParCouleur){
-        console.log(validationParCouleur);
         let indexEnCours = this.nbEssais * 10;
         for (let i = 0; i<this.nbLettres; i++){
             const tuileEnCours = document.getElementById(String(indexEnCours));

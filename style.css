@@ -1,6 +1,8 @@
-/* ===== VARIABLES ===== */
-/* ===== BASE ===== */
+@import url('clavier.css');
+@import url('dialog.css');
+@import url('grille.css');
 
+/* ===== BASE ===== */
 .base {
     background-color: black;
     font-size: large;
@@ -10,7 +12,6 @@
     justify-items: center;
     align-items: center;
     margin: 0;
-
 }
 
 .header {
@@ -20,131 +21,8 @@
   padding-bottom: 1rem;
 
 }
-dialog {
-  background: rgb(49, 49, 49);
-  margin: auto;
-  border: solid grey;
-  border-radius: 1rem;
-  font-size: large;
-  color: azure; 
-  font-size: 2rem;
-}
-dialog:not([open]) {
-    display: none !important;
-}
 
-.dialogErreur {
-  outline: none;
-  margin: auto;
-  height: auto;
-  max-height: 3rem;
-  padding: 0.5rem 4rem;
-  font-size: 1.4rem;
-  font-weight:light;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-.dialogErreur p {
-  margin: 0; 
-  padding: 0rem;
-  line-height: 1;
-}
-
-.dialog.contenu {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 2rem;
-}
-.dialog.bouton {
-    display: flex;
-    border: 0.3rem outset grey;
-    border-radius: 4px;
-    margin: 1px;
-    width: 10rem;
-    height: 50px;
-    font-size: 1.4rem;
-    justify-content: center;
-    align-items: center;
-    user-select: none;
-}
-.dialog.bouton:active,   
-.touche.active {
-     background: gray;
-}
-
-
-/* ===== GRILLE ===== */
-
-.grille{
-    padding-bottom: 1rem;
-    font-family: 'Roboto', sans-serif;
-}
-
-.row {
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    margin: 0.2rem
-}
-.tuile {
-    display: flex;
-    border: 0.125rem solid grey;
-    border-radius: 0.25rem;
-    margin: 0.2rem;
-    width: 2.8rem;
-    height: 2.8rem;
-    font-size: 2rem;
-    justify-content: center;
-    align-items: center;
-    background-color: black;
-
-}
-
-@media (max-width: 480px) { /* petit téléphone */
-  .tuile {
-    width: 7.5vw;
-    height: 7.5vw;
-    font-size: 1.2rem;
-  }
-}
-
-.tuile.tuileActive {
-  border: .2rem solid rgb(255, 0, 0);
-}
-
-.tuile.inactive {
-  display: none;
-}
-
-
-.classBoutonNbLettres {
-  display: flex;
-  justify-content: center;
-  padding: 1.5rem;
-  gap: 0.7rem;
-}
-
-.boutonNbLettres {
-  width: 1.7rem;
-  height: 1.7rem;
-  border-radius: 1rem;
-  color: azure;
-  font-size: large;  
-  background: grey;
-}
-
-.boutonNbLettres.active {
-  background: green;
-}
-
-
-/* ===== STATES ===== */
+/* ===== ÉTATS ===== */
 .mauvaiseEndroit {
     background-color: #f77c00;
 }
@@ -154,42 +32,3 @@ dialog:not([open]) {
 .absent {
     background-color: grey;
 }
-
-/*========CLAVIER============= */
-.clavier {
-    display: grid;
-      grid-template-columns: repeat(10, 1fr);
-      place-items: center;
-      gap: 0.4rem;
-      max-width: 35rem;
-      margin: 0 auto;
-}
-
-.touche {
-    display: flex;
-    border: 0.15rem outset grey;
-    border-radius: 0.25rem;
-    width: 3.2rem;
-    height: 3.4rem;
-    font-size: 2rem;
-    justify-content: center;
-    align-items: center;
-    user-select: none;
-  }
-
-.touche:focus {
- outline: none;
-}
-
-.touche.large {
-  grid-column: span 3;
-  width: 7.5rem;
-}
-
-/* Active pour le clavier virtuel et physique*/
-.touche:active,   
-.touche.active {
-     background: gray;
-}
-
-

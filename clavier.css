@@ -1,0 +1,35 @@
+.clavier {
+    display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      place-items: center;
+      gap: 0.4rem;
+      max-width: 35rem;
+      margin: 0 auto;
+}
+
+.touche {
+    display: flex;
+    border: 0.15rem outset grey;
+    border-radius: 0.25rem;
+    width: 3.2rem;
+    height: 3.4rem;
+    font-size: 2rem;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+  }
+
+.touche:focus {
+ outline: none;
+}
+
+.touche.large {
+  grid-column: span 3;
+  width: 7.5rem;
+}
+
+/* Active pour le clavier virtuel et physique*/
+.touche:active,   
+.touche.active {
+     background: gray;
+}

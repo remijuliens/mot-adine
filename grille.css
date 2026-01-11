@@ -1,0 +1,62 @@
+.grille{
+    padding-bottom: 1rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    margin: 0.2rem
+}
+
+.tuile {
+    display: flex;
+    border: 0.125rem solid grey;
+    border-radius: 0.25rem;
+    margin: 0.2rem;
+    width: 2.8rem;
+    height: 2.8rem;
+    font-size: 2rem;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+
+}
+
+@media (max-width: 480px) { /* petit téléphone */
+  .tuile {
+    width: 7.5vw;
+    height: 7.5vw;
+    font-size: 1.2rem;
+  }
+}
+
+.tuile.tuileActive {
+  border: .2rem solid rgb(187, 150, 0);
+}
+
+.tuile.inactive {
+  display: none;
+}
+
+
+.classBoutonNbLettres {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem;
+  gap: 0.7rem;
+}
+
+.boutonNbLettres {
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 1rem;
+  color: azure;
+  font-size: large;  
+  background: grey;
+}
+
+.boutonNbLettres.active {
+  background: green;
+}
