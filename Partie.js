@@ -13,8 +13,6 @@ export class Partie {
         this.activerTuile();
     }
 
-
-
     longueur(){
         return this.nbLettres;
     }

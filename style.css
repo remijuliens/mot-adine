@@ -32,3 +32,47 @@
 .absent {
     background-color: grey;
 }
+
+/* ========== BOUTONS NB DE LETTRES ========== */
+
+.classBoutonNbLettres {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem;
+  gap: 0.7rem;
+}
+
+.boutonNbLettres {
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 1rem;
+  color: azure;
+  font-size: large;  
+  background: grey;
+}
+
+.boutonNbLettres.active {
+  background: green;
+}
+
+/* Tablette */
+@media (max-width: 768px) {
+    .classBoutonNbLettres {
+        padding: 1rem;
+        gap: 0.5rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .classBoutonNbLettres {
+        padding: 0.5rem;
+        gap: 0.4rem;
+    }
+    
+    .boutonNbLettres {
+        width: 1.5rem;
+        height: 1.5rem;
+        font-size: medium;
+    }
+}
