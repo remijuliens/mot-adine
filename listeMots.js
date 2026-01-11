@@ -139,7 +139,6 @@ export const ListeMots5Lettres = [
     "bille",
     "bison",
     "bisou",
-    "black",
     "blame",
     "blanc",
     "blanc",
